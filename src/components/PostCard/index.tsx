@@ -1,8 +1,20 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { CAREGORIES } from '../../utils/enums/categories';
+import { stringToDate } from '../../helpers/date';
 
-const PostCard = () => {
+interface IPostItem {
+  id: string;
+  title: string;
+  categorie: CAREGORIES;
+  shortDescription: string;
+  createdAt: string;
+  description: string | object;
+  coverUrl: string;
+}
+
+const PostCard = ({item}: {item: IPostItem}) => {
   const navigation = useNavigation();
 
   const goToPost = () => {
@@ -15,40 +27,39 @@ const PostCard = () => {
         <View className="w-full aspect-video">
           <Image
             source={{
-              uri: 'https://storage.googleapis.com/star-lab/blog/OGs/analise-de-dados-7-ferramentas.png',
+              uri: item.coverUrl,
             }}
             className="w-full h-full"
             resizeMode="cover"
           />
         </View>
         <View className="absolute bottom-0 bg-violet-500 px-3 py-1.5 rounded-tr-md rounded-br-md">
-          <Text className="text-gray-50 font-bold text-xs">TAG</Text>
+          <Text className="text-gray-50 font-bold text-sm">TAG</Text>
         </View>
       </View>
       
-      <View className="p-4 space-y-3">
-        <View className="space-y-2">
-          <Text className="text-lg font-semibold text-gray-100 -ml-0.5">
-            The Garden City
+      <View className="p-6 space-y-4 gap-4">
+        <View className="space-y-6">
+          <Text className="text-xl font-semibold text-gray-100">
+            {item.title}
           </Text>
         </View>
         
-        <Text className="font-normal text-gray-200">
-          Bengaluru (also called Bangalore) is the center of India's high-tech
-          industry. The city is also known for its parks and nightlife.
+        <Text className="font-normal text-lg text-gray-400" numberOfLines={3}>
+          {item.shortDescription}
         </Text>
         
-        <View className="flex-row items-center justify-between space-x-4">
+        <View className="flex-row items-center justify-between space-x-6">
           <View className="flex-row items-center">
-            <Text className="text-gray-400 font-normal">
-              6 mins ago
+            <Text className="text-gray-500 font-semibold text-md">
+              {stringToDate(item.createdAt)}
             </Text>
           </View>
           <TouchableOpacity 
             onPress={goToPost}
             className="bg-emerald-500 px-4 py-2 rounded-md"
           >
-            <Text className="text-white font-medium">Ver mais...</Text>
+            <Text className="text-white font-medium text-lg">Ver mais...</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -1,29 +1,62 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
-  SafeAreaView,
   View,
   Text,
   FlatList,
   TouchableOpacity,
   Modal,
   Pressable,
+  ActivityIndicator,
 } from 'react-native';
+
+import {GET_ALL_POST} from '../../graphql/query/posts';
 
 import PostCard from '../../components/PostCard';
 import Header from '../../components/Header';
+import { useQuery } from '@apollo/client';
 
 const Home = () => {
+  const [categorie, setCategorie] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+
+  const {data, loading, refetch} = useQuery(GET_ALL_POST, {
+    variables: {
+      where: categorie ? {categorie} : undefined,
+    }
+  })
 
   const onOpen = () => setIsOpen(true);
   const onClose = () => setIsOpen(false);
+
+  const handleFind = (value: string) => {
+    setCategorie(value);
+    setTimeout(() => {
+      refetch();
+      onClose();
+    }, 600);
+  };
+
+  const posts = useMemo(() => {
+    if (!loading && data?.posts) {
+      return data.posts;
+    }
+    return [];
+  }, [loading, data]);
+
+  if (loading) {
+    return (
+      <View className="flex-1 items-center justify-center px-6 bg-gray-900">
+        <ActivityIndicator color="#6b21a8" size="large" />
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 items-center justify-start px-6 bg-gray-900">
       <Header onOpen={onOpen} />
       <FlatList
-        data={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
-        renderItem={({ item }) => <PostCard />}
+        data={posts}
+        renderItem={({item}) => <PostCard item={item} />}
         ItemSeparatorComponent={() => <View className="h-6" />}
         keyExtractor={(item) => item.toString()}
         showsVerticalScrollIndicator={false}
