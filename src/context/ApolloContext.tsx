@@ -29,10 +29,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export const ApolloContext: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return (
-    <ApolloProvider client={client}>
-      {children}
-    </ApolloProvider>
-  );
-}
+export const ApolloContextProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+};
