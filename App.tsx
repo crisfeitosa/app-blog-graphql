@@ -8,11 +8,11 @@ import { View } from "react-native";
 
 export default function App() {
   return (
-    <View className="flex-1 bg-gray-900">
+    <>
       <StatusBar style="light" translucent />
       <SafeAreaView className="flex-1 bg-gray-900">
         <Routes />
       </SafeAreaView>
-    </View>
+    </>
   );
 }
