@@ -1,6 +1,6 @@
 export enum CAREGORIES {
-  JAVASCRIPT = 'Javascript',
-  NODE = 'Node',
-  FRONTEND = 'Frontend',
-  TYPESCRIPT = 'TypeScript',
+  JAVASCRIPT = 'javascript',
+  NODE = 'node',
+  FRONTEND = 'frontend',
+  TYPESCRIPT = 'typescript',
 }

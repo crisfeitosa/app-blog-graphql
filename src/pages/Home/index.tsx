@@ -37,6 +37,8 @@ const Home = () => {
     }, 600);
   };
 
+  console.log('Post data:', data);
+
   const posts = useMemo(() => {
     if (!loading && data?.posts) {
       return data.posts;
@@ -75,16 +77,28 @@ const Home = () => {
             className="flex-1 justify-end bg-black/50"
             onPress={onClose}
           >
-            <View className="bg-white rounded-t-3xl p-6">
+            <View className="bg-gray-100 rounded-t-3xl p-6 h-48">
               <Text className="text-lg font-semibold text-purple-800 mb-4">
                 Selecione um Filtro
               </Text>
-              <View className="flex-row justify-start space-x-2">
-                <TouchableOpacity className="bg-green-100 px-3 py-2 rounded-full">
-                  <Text className="text-green-800 font-medium">NODE JS</Text>
+              <View className="flex-row justify-start space-x-2 gap-2">
+                <TouchableOpacity
+                  className="bg-purple-100 px-3 py-2 rounded-full"
+                  onPress={() => handleFind('node')}
+                >
+                  <Text className="text-purple-800 font-medium">NODE JS</Text>
                 </TouchableOpacity>
-                <TouchableOpacity className="bg-red-100 px-3 py-2 rounded-full">
-                  <Text className="text-red-800 font-medium">REACT JS</Text>
+                <TouchableOpacity
+                  className="bg-purple-100 px-3 py-2 rounded-full"
+                  onPress={() => handleFind('frontend')}
+                >
+                  <Text className="text-purple-800 font-medium">Frontend</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  className="bg-purple-100 px-3 py-2 rounded-full"
+                  onPress={() => handleFind('')}
+                >
+                  <Text className="text-purple-800 font-medium">Todos</Text>
                 </TouchableOpacity>
               </View>
             </View>

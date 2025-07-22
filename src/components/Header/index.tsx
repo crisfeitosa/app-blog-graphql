@@ -15,7 +15,7 @@ const Header: React.FC<IHeader> = ({ onOpen }) => {
         onPress={onOpen}
         className="p-2"
       >
-        <Ionicons name="search" size={18} color="#86198f" />
+        <Ionicons name="search" size={24} color="#86198f" />
       </TouchableOpacity>
     </View>
   );
