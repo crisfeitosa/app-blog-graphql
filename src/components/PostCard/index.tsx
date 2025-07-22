@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { CAREGORIES } from '../../utils/enums/categories';
 import { stringToDate } from '../../helpers/date';
+import { RootStackParamList } from '../../routes';
 
 interface IPostItem {
   id: string;
@@ -15,10 +16,12 @@ interface IPostItem {
 }
 
 const PostCard = ({item}: {item: IPostItem}) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const goToPost = () => {
-    navigation.navigate('AboutPost' as never);
+    navigation.navigate('AboutPost', {
+      postId: item.id,
+    });
   };
 
   return (
@@ -34,7 +37,9 @@ const PostCard = ({item}: {item: IPostItem}) => {
           />
         </View>
         <View className="absolute bottom-0 bg-violet-500 px-3 py-1.5 rounded-tr-md rounded-br-md">
-          <Text className="text-gray-50 font-bold text-sm">TAG</Text>
+          <Text className="text-gray-50 font-bold text-sm">
+            {item.categorie.toUpperCase()}
+          </Text>
         </View>
       </View>
       

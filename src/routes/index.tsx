@@ -7,6 +7,11 @@ import AboutPost from '../pages/AboutPost';
 
 const Stack = createNativeStackNavigator();
 
+export interface RootStackParamList {
+  Home: undefined
+  AboutPost: { postId: string };
+}
+
 function Routes() {
   return (
     <NavigationContainer>
