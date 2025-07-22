@@ -9,8 +9,8 @@ import {
   Pressable,
 } from 'react-native';
 
-import PostCard from '../../components/PostCard/index';
-import Header from '../../components/Header/index';
+import PostCard from '../../components/PostCard';
+import Header from '../../components/Header';
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,19 +19,17 @@ const Home = () => {
   const onClose = () => setIsOpen(false);
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
-      <View className="flex-1 items-center justify-start">
-        <Header onOpen={onOpen} />
-        <FlatList
-          data={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
-          renderItem={({ item }) => <PostCard />}
-          ItemSeparatorComponent={() => <View className="h-4" />}
-          keyExtractor={(item) => item.toString()}
-          showsVerticalScrollIndicator={false}
-          className="w-full"
-        />
-      </View>
-      
+    <View className="flex-1 items-center justify-start px-6 bg-gray-900">
+      <Header onOpen={onOpen} />
+      <FlatList
+        data={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+        renderItem={({ item }) => <PostCard />}
+        ItemSeparatorComponent={() => <View className="h-6" />}
+        keyExtractor={(item) => item.toString()}
+        showsVerticalScrollIndicator={false}
+        className="w-full"
+      />
+
       <Modal
         visible={isOpen}
         transparent={true}
@@ -57,7 +55,7 @@ const Home = () => {
           </View>
         </Pressable>
       </Modal>
-    </SafeAreaView>
+    </View>
   );
 };
 

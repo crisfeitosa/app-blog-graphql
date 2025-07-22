@@ -8,8 +8,8 @@ interface IHeader {
 
 const Header: React.FC<IHeader> = ({ onOpen }) => {
   return (
-    <View className="flex-row justify-between items-center max-w-80 mb-4">
-      <Text className="text-3xl font-bold text-gray-900">News</Text>
+    <View className="flex-row justify-between items-center w-full mb-4">
+      <Text className="text-3xl font-bold text-gray-100">News</Text>
       <View className="flex-1" />
       <TouchableOpacity 
         onPress={onOpen}
