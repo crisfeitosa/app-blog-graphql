@@ -22,7 +22,7 @@ const Home = () => {
 
   const {data, loading, refetch} = useQuery(GET_ALL_POST, {
     variables: {
-      where: categorie ? {categorie} : undefined,
+      where: categorie ? {categorie} : {},
     }
   })
 
@@ -36,8 +36,6 @@ const Home = () => {
       onClose();
     }, 600);
   };
-
-  console.log('Post data:', data);
 
   const posts = useMemo(() => {
     if (!loading && data?.posts) {
@@ -62,7 +60,7 @@ const Home = () => {
           data={posts}
           renderItem={({item}) => <PostCard item={item} />}
           ItemSeparatorComponent={() => <View className="h-6" />}
-          keyExtractor={(item) => item.toString()}
+          keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
           className="w-full"
         />
